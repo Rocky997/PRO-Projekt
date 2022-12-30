@@ -1,2 +1,3 @@
 # Projekt
-Zatím tu nic není 🤷‍♂
+Základ pro naši hru
+
