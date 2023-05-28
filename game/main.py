@@ -10,38 +10,59 @@ if __name__=="__main__":
     
     #maimenu
     width,height = 1280, 720
+    gameScreen = pygame.image.load("img/GAMEscreen.png")
+    mainMenu = pygame.image.load("img/mainmenu.png")
     mainSurface = pygame.display.set_mode((width, height))
     pygame.display.set_caption("hra lol")
-    mainMenu = pygame.image.load('img/mainmenu.png')
     mainSurface.blit(mainMenu, (0,0))
     
+    #vars
+    currentScreen = "mainMenu"
+
     #cudliky
     red = pygame.image.load('img/red.png')
     green = pygame.image.load('img/green.png')
     widthButton, heightButton = 330, 50
+
     #strat cudl
     startHry = pygame.Rect(135,240,widthButton,heightButton)
-    startHryIMG = pygame.transform.scale(red, (widthButton, heightButton))
-    startHryIMGNajeto = pygame.transform.scale(green, (widthButton, heightButton))
+    backButton = pygame.Rect(0,0,widthButton-200,heightButton)
+    redButton = pygame.transform.scale(red, (widthButton, heightButton))
+    greenButton = pygame.transform.scale(green, (widthButton, heightButton))
 
     #while
     opened = True
     while opened:
+        a,b = pygame.mouse.get_pos()
+        if currentScreen == "mainMenu":
+            if startHry.x <= a <= startHry.x + widthButton and startHry.y <= b <= startHry.y + heightButton:
+                mainSurface.blit(redButton, (135, 240))
+            elif currentScreen:
+                mainSurface.blit(greenButton, (135, 240))
+        elif currentScreen == "game":
+            if backButton.x <= a <= backButton.x + widthButton-200 and backButton.y <= b <= backButton.y + heightButton:
+                mainSurface.blit(redButton, (-200, 0))
+            elif currentScreen:
+                mainSurface.blit(greenButton, (-200, 0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 opened = False
             # KLIK NA CUDL
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if startHry.collidepoint(event.pos):
-                    print("posunu se do char creatu")
-            # druha moznost LOAD?
-            # na vic cudliku jsem uz linej
-        a,b = pygame.mouse.get_pos()
-        if startHry.x <= a <= startHry.x + widthButton and startHry.y <= b <= startHry.y + heightButton:
-            mainSurface.blit(startHryIMG, (135, 240))
-        else:
-            mainSurface.blit(startHryIMGNajeto, (135, 240))
-
-
+                if currentScreen == "mainMenu":
+                    if startHry.collidepoint(event.pos):
+                        mainSurface.blit(gameScreen, (0,0))
+                        currentScreen = "game"
+                elif currentScreen == "game":
+                    if backButton.collidepoint(event.pos):
+                        mainSurface.blit(mainMenu, (0,0))
+                        currentScreen = "mainMenu"
+#                if startHry.collidepoint(event.pos):
+#                    if currentScreen == "mainMenu":
+#                        mainSurface.blit(gameScreen, (0,0))
+#                        currentScreen = "game"
+#                    elif currentScreen == "game":
+#                       mainSurface.blit(mainMenu, (0,0))
+#                        currentScreen = "mainMenu"
 
         pygame.display.update()
