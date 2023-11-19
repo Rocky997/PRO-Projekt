@@ -1,0 +1,48 @@
+CREATE TABLE Postava (
+    hracID int NOT NULL,
+    jmenoHrace varchar(255) NOT NULL,
+    statsID int NOT NULL,
+    PRIMARY KEY (hracID)
+);
+
+CREATE TABLE Staty (
+    statsID int NOT NULL,
+    jmeno varchar(255),
+    zivotID int NOT NULL,
+    silaID int NOT NULL,
+    critID int NOT NULL,
+    PRIMARY KEY (statsID)
+);
+
+CREATE TABLE Crit (
+    critID int NOT NULL,
+    pocetCrit int NOT NULL,
+    PRIMARY KEY (critID)
+);
+
+CREATE TABLE Sila (
+    silaID int NOT NULL,
+    pocetSila int NOT NULL,
+    PRIMARY KEY (silaID)
+);
+
+CREATE TABLE HP (
+    zivotID int NOT NULL,
+    pocetZivot int NOT NULL,
+    PRIMARY KEY (zivotID)
+);
+
+CREATE TABLE Classa (
+    classID int NOT NULL,
+    jmenoClass varchar(255) NOT NULL,
+    hracID int NOT NULL,
+    PRIMARY KEY (classID)
+);
+
+SELECT * FROM tabulka;
+// zatim nevime co bude potreba
+
+INSERT INTO tabulka (sloupec1, sloupec2...)
+VCALUES (hodnota1, hodnota2....)
+// zatim nevime co bude potreba
+
